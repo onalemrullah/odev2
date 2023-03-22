@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+ body{
+     height: 100vh;
+     display: grid;
+     grid-template-rows: 1fr 3fr;
+ }
+ section:nth-child(1){
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+ }
+ #t1{
+     display: flex;
+ }
+ li{
+     list-style: none;
+     margin: 10px;
+ }
+ section:nth-child(2){
+     display: flex;
+     justify-content:center;
+     align-items: center;
+     
+ }
+ div{
+     margin: 30px;
+     padding: 30px;
+     border: 1px solid black;
+     border-radius: 5px;
+     background-color: white;
+ }
+ img{
+     height: 200px;
+     width: 150px;
+ }
+</style>
+<body>
+    <section>
+     <h1>soru cevap</h1>
+    <p id="soru"></p>
+   <ol id="t1">
+       <li>
+           <input id="s1" type="button" onclick="emo()">
+    </li>
+       <li>
+       <input id="s2" type="button" onclick="emo1()">
+       </li>
+   </ol>
+    </section>
+    <section>
+       <div id="kutu1">
+           <img title="salah" src="resimler/salah.jpg">
+       </div>
+       <div id="kutu2">
+           <img title="ronaldo" src="resimler/ronaldo.jpg">
+       </div>
+       <div id="kutu3">
+           <img title="messi" src="resimler/messi.jpg">
+       </div>
+    </section>
+    
+</body>
+<script>
+    let sayac=0;
+     let dogru=0;
+     let yanlis=0;
+      const futbol={
+    salah: {
+    gol:10,
+   
+    },
+    ronaldo: {
+     gol:20,
+   
+    },
+    messi: {
+      gol:30,
+    
+    }
+  };
+  let secilen;
+    let alanlar=document.getElementsByTagName("img");
+    [...alanlar].forEach((alan,index)=>{
+        alan.addEventListener("click",()=>{
+             secilen=alan.getAttribute("title");
+            goster(secilen);
+        });
+    });
+    let gol;
+    let tut;
+    function goster(secilen){
+        sayac=sayac+1;
+        if (sayac<=3){
+        alert(secilen);
+      
+        let bilgiler=futbol[secilen];
+         gol=bilgiler['gol'];
+     
+        
+        document.getElementsByTagName("p")[0].innerHTML=secilen +" Atığı Gollerin sayısı";
+      let random=Math.round(Math.random()*1);
+      if (random==0){
+        s1.value=gol;
+        s2.value=Math.round(Math.random()*60);
+      }
+      else {
+        s2.value=gol;
+        s1.value=Math.round(Math.random()*60);
+      }
+    }
+    else {
+         if (dogru>yanlis){
+            alert("kazandınız");
+         }
+         else {
+            alert("kaybetiniz");
+         }
+        
+    }
+      
+    }
+    function emo(){
+        let el=document.getElementById("s1").value;
+
+        if (el==gol){
+            alert("doğru cevap");
+            dogru=dogru+1;
+            if (secilen=="salah"){
+                
+        document.getElementById("kutu1").style.background="green";
+            }
+            else if (secilen=="ronaldo"){
+                document.getElementById("kutu2").style.background="green";
+            }
+            else if (secilen=="messi"){
+                document.getElementById("kutu3").style.background="green";
+            }
+        }
+        else{
+            yanlis=yanlis+1;
+            alert("cevap yanlış");
+            if (secilen=="salah"){
+                
+                document.getElementById("kutu1").style.background="red";
+                    }
+                    else if (secilen=="ronaldo"){
+                        document.getElementById("kutu2").style.background="red";
+                    }
+                    else if (secilen=="messi"){
+                        document.getElementById("kutu3").style.background="red";
+                    }
+        }
+     
+         
+    }
+   
+    function emo1(){
+        let el=document.getElementById("s2").value;
+        if (el==gol){
+            alert("cevap doğru");
+            dogru=dogru+1;
+            if (secilen=="salah"){
+                
+                document.getElementById("kutu1").style.background="green";
+                    }
+                    else if (secilen=="ronaldo"){
+                        document.getElementById("kutu2").style.background="green";
+                    }
+                    else if (secilen=="messi"){
+                        document.getElementById("kutu3").style.background="green";
+                    }
+        }
+        else{
+            alert("cevap yanlış");
+            if (secilen=="salah"){
+                 yanlis=yanlis+1;
+                document.getElementById("kutu1").style.background="red";
+                    }
+                    else if (secilen=="ronaldo"){
+                        document.getElementById("kutu2").style.background="red";
+                    }
+                    else if (secilen=="messi"){
+                        document.getElementById("kutu3").style.background="red";
+                    }
+        }
+    }
+   
+</script>
+</html>
